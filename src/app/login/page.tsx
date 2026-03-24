@@ -32,12 +32,13 @@ export default async function LoginPage(props: { searchParams: Promise<{ [key: s
             Log in
           </Button>
           
-          <div className="mt-4 p-4 text-sm bg-orange-50 border border-orange-200 text-orange-800 rounded-lg whitespace-pre-line dark:bg-orange-950/20 dark:border-orange-900/40 dark:text-orange-400 leading-relaxed">
-            <strong className="block mb-1">💡 테스트 접속 안내</strong>
-            이메일 및 패스워드를 입력하여 접속하세요.<br/>
-            최초 시작 시 <strong>Supabase Dashboard의 Auth 메뉴</strong>에서 직접 샘플 계정(예: admin@acmeskin.com)을 생성해야 합니다.
-            <br/><br/>
-            *생성 후 Auto-Confirm옵션을 켰는지 꼭 확인해 주세요! (또는 생성된 이메일 계정의 발송된 인증 메일에서 Confirm)
+          <div className="mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-800 text-center">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">
+              아직 우리 브랜드 전용 워크스페이스가 없으신가요?
+            </p>
+            <a href="/signup" className="inline-flex items-center justify-center w-full px-4 py-2 border border-emerald-200 text-sm font-medium rounded-md text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-900/40">
+              새로운 브랜드 테넌트 가입하기 &rarr;
+            </a>
           </div>
         </form>
       </div>

@@ -16,7 +16,10 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             <a href="/ingredients" className="hover:text-indigo-600 transition-colors">Ingredients</a>
             <a href="/concerns" className="hover:text-indigo-600 transition-colors">Concerns</a>
             <a href="/buyers-guides" className="hover:text-indigo-600 transition-colors">Buyer's Guides</a>
-            <a href="/login" className="text-emerald-700 hover:text-emerald-800 dark:text-emerald-500 font-semibold px-3 py-1.5 bg-emerald-50 rounded-full dark:bg-emerald-950/50 transition-colors">For Brands</a>
+            <a href="/login" className="text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 transition-colors">Login</a>
+            <a href="/signup" className="text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 font-semibold px-4 py-1.5 bg-emerald-50 rounded-full dark:bg-emerald-900/30 transition-colors border border-emerald-100 dark:border-emerald-800">
+              브랜드 파트너 신청
+            </a>
           </nav>
           
           <MobileMenu />
