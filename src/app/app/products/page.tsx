@@ -42,9 +42,9 @@ export default async function WorkspaceProducts() {
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">Products</h1>
           <p className="text-zinc-500 mt-1 dark:text-zinc-400">관리 중인 제품 목록과 자산 구축 상태 (MRI 진단 ~ Dossier ~ Answer Assets)</p>
         </div>
-        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white dark:bg-indigo-500 dark:hover:bg-indigo-600">
+        <a href="/app/products/new" className="inline-flex items-center justify-center rounded-md text-sm font-medium px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white shadow dark:bg-indigo-500 dark:hover:bg-indigo-600 transition-colors">
           <Plus className="w-4 h-4 mr-2" /> 새 제품 등록
-        </Button>
+        </a>
       </div>
 
       <div className="flex gap-4 items-center">
