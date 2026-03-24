@@ -18,7 +18,7 @@ export async function savePrescription(productId: string, questions: any[]) {
   
   if (error) {
     console.error(error)
-    throw new Error("Failed to save dossier")
+    return { success: false, error: error.message }
   }
 
   revalidatePath('/app/products')
@@ -46,10 +46,11 @@ export async function saveAnswerDraft(productId: string, questionText: string, a
   
   if (error) {
     console.error(error)
-    throw new Error("Failed to save answer draft")
+    return { success: false, error: error.message }
   }
   
   revalidatePath('/app/dashboard')
+  revalidatePath('/app/reviews/queue')
   revalidatePath('/app/products/[id]/builder', 'page')
   redirect('/app/dashboard')
 }

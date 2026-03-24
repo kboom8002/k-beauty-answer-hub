@@ -35,7 +35,7 @@ export async function createProduct(formData: FormData): Promise<void> {
 
   if (error) {
     console.error("Error creating product:", error.message)
-    return
+    redirect(`/app/products/new?error=${encodeURIComponent(error.message)}`)
   }
   
   // Optionally, create an empty dossier immediately so it's "Drafting" status

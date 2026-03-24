@@ -19,6 +19,7 @@ function BuilderForm({ productId }: { productId: string }) {
   
   const [editedAnswer, setEditedAnswer] = useState("")
   const [editedBoundary, setEditedBoundary] = useState("")
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   const handleDraft = async () => {
     setLoading(true)
@@ -39,10 +40,15 @@ function BuilderForm({ productId }: { productId: string }) {
 
   const handleSubmit = async () => {
     setIsSubmitting(true)
+    setErrorMsg(null)
     try {
-      await saveAnswerDraft(productId, currentQuestion, editedAnswer, editedBoundary, draft?.suggestedEvidence || [])
+      const res = await saveAnswerDraft(productId, currentQuestion, editedAnswer, editedBoundary, draft?.suggestedEvidence || [])
+      if (res?.error) {
+        setErrorMsg(res.error)
+      }
     } catch (e) {
       console.error(e)
+      setErrorMsg("알 수 없는 오류가 발생했습니다.")
     } finally {
       setIsSubmitting(false)
     }
@@ -69,6 +75,11 @@ function BuilderForm({ productId }: { productId: string }) {
             </Button>
           </CardHeader>
           <CardContent className="space-y-6">
+            {errorMsg && (
+              <div className="p-3 text-sm text-red-800 bg-red-50 border border-red-200 rounded-lg dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50">
+                ⚠️ 검수 요청 실패 (데이터베이스 RLS 권한 거부 또는 필수값 누락): {errorMsg}
+              </div>
+            )}
             <div className="space-y-3">
               <label className="text-sm font-bold text-zinc-800 dark:text-zinc-200">A. 핵심 답변 (Answer)</label>
               <Textarea 

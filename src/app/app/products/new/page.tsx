@@ -4,7 +4,10 @@ import { Input } from "@/components/ui/input"
 import { ArrowLeft, Box } from "lucide-react"
 import { createProduct } from "../actions"
 
-export default async function NewProductPage() {
+export default async function NewProductPage(props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const searchParams = await props.searchParams;
+  const error = searchParams?.error as string | undefined;
+  
   const supabase = await createClient()
   
   // Fetch available sectors for the dropdown
@@ -25,6 +28,13 @@ export default async function NewProductPage() {
       </div>
 
       <div className="bg-white border border-zinc-200 rounded-xl p-6 md:p-8 shadow-sm dark:bg-zinc-900/50 dark:border-zinc-800">
+        {error && (
+          <div className="mb-6 p-4 text-sm bg-red-50 border border-red-200 text-red-800 rounded-lg dark:bg-red-950/30 dark:border-red-900/50 dark:text-red-400 font-medium">
+            ⚠️ 제품 등록 실패: 권한 부족(RLS) 또는 데이터베이스 오류입니다.
+            <br />
+            <span className="text-xs opacity-80 mt-1 block">사유: {error}</span>
+          </div>
+        )}
         <form action={createProduct} className="space-y-6">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
