@@ -67,7 +67,7 @@ export default async function WorkspaceLayout({ children }: { children: ReactNod
         <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
           <div className="flex items-center gap-3 px-3 py-2">
             <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs dark:bg-indigo-900/50 dark:text-indigo-400">
-              {user?.email?.charAt(0).toUpperCase() || 'B'}
+              {(user?.email || 'B').charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 overflow-hidden">
               <div className="text-sm font-medium text-zinc-900 truncate dark:text-zinc-100">{role === 'reviewer' ? 'Expert Reviewer' : 'Brand Admin'}</div>
