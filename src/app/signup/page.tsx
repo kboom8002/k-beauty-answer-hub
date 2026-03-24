@@ -1,7 +1,10 @@
 import { ShieldCheck, Building2, UserCircle, Briefcase } from "lucide-react"
 import { signupBrand } from "./actions"
 
-export default function SignupPage() {
+export default async function SignupPage(props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const searchParams = await props.searchParams;
+  const error = searchParams?.error as string | undefined;
+
   return (
     <div className="min-h-screen bg-zinc-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 dark:bg-zinc-950">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -17,6 +20,13 @@ export default function SignupPage() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        {error && (
+          <div className="mb-4 p-4 text-sm bg-red-50 border border-red-200 text-red-800 rounded-lg dark:bg-red-950/30 dark:border-red-900/50 dark:text-red-400 font-medium">
+            {error === 'BrandCreationFailed' && '⚠️ 브랜드 테넌트 생성 거부됨: 데이터베이스(RLS) 권한이 없습니다. (00002.sql 실행 여부를 확인하세요)'}
+            {error === 'SignupFailed' && '⚠️ 계정 생성 실패: 이메일 형식이 잘못되었거나 이미 가입된 메일일 수 있습니다.'}
+            {error !== 'BrandCreationFailed' && error !== 'SignupFailed' && `오류 발생: ${error}`}
+          </div>
+        )}
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 dark:bg-zinc-900 dark:border dark:border-zinc-800">
           <form className="space-y-6" action={signupBrand}>
             
