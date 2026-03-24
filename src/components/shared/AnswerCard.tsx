@@ -1,6 +1,6 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrustStrip } from "./TrustStrip";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 
 interface AnswerCardProps {
@@ -53,7 +53,7 @@ export function AnswerCard({
       </CardContent>
       {ctaUrl && (
         <CardFooter className="bg-zinc-50 border-t border-zinc-100 py-3 dark:bg-zinc-900 dark:border-zinc-800">
-          <a href={ctaUrl} className={buttonVariants({ variant: "ghost", className: "w-full justify-between text-indigo-700 hover:text-indigo-800 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:text-indigo-300 dark:hover:bg-indigo-950/50" })}>
+          <a href={ctaUrl} className="inline-flex h-8 gap-1.5 px-3 items-center w-full justify-between rounded-md text-sm font-medium transition-colors text-indigo-700 hover:text-indigo-800 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:text-indigo-300 dark:hover:bg-indigo-950/50">
             자세히 보기 <ChevronRight className="w-4 h-4 ml-2" />
           </a>
         </CardFooter>

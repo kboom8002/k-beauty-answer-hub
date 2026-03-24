@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { ArrowUpRight, BarChart2, PlusCircle, AlertCircle, FileText, CheckCircle2 } from "lucide-react"
 import { createClient } from "@/utils/supabase/server"
 
@@ -147,10 +147,10 @@ export default async function WorkspaceDashboard() {
                 AI Agent를 활용해 빈 질문 포트폴리오를 채우고 검색 신뢰도를 확보하세요.
               </p>
               <div className="space-y-3">
-                <a href="/app/products" className={buttonVariants({ variant: "secondary", className: "w-full justify-start font-semibold text-indigo-900 bg-white hover:bg-zinc-50" })}>
+                <a href="/app/products" className="inline-flex h-9 px-4 items-center w-full justify-start rounded-lg text-sm font-semibold text-indigo-900 bg-white hover:bg-zinc-50 transition-all">
                   <PlusCircle className="mr-2 h-4 w-4" /> Generate Question Prescription
                 </a>
-                <a href="/app/products" className={buttonVariants({ className: "w-full justify-start font-semibold bg-indigo-500/30 hover:bg-indigo-500/50 border border-indigo-400 text-white" })}>
+                <a href="/app/products" className="inline-flex h-9 px-4 items-center w-full justify-start rounded-lg text-sm font-semibold text-white bg-indigo-500/30 hover:bg-indigo-500/50 border border-indigo-400 transition-all">
                   <PlusCircle className="mr-2 h-4 w-4" /> Create Answer Card Draft
                 </a>
               </div>
