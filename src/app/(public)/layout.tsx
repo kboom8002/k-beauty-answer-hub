@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { ShieldCheck } from "lucide-react"
+import { MobileMenu } from "@/components/shared/MobileMenu"
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
@@ -17,6 +18,8 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             <a href="/buyers-guides" className="hover:text-indigo-600 transition-colors">Buyer's Guides</a>
             <a href="/login" className="text-emerald-700 hover:text-emerald-800 dark:text-emerald-500 font-semibold px-3 py-1.5 bg-emerald-50 rounded-full dark:bg-emerald-950/50 transition-colors">For Brands</a>
           </nav>
+          
+          <MobileMenu />
         </div>
       </header>
 
