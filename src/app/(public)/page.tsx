@@ -1,7 +1,6 @@
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Search, TrendingUp, ShieldCheck } from "lucide-react"
+import { TrendingUp, ShieldCheck } from "lucide-react"
+import { HeroSearch } from "@/components/shared/HeroSearch"
 
 export default function Home() {
   return (
@@ -18,16 +17,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="w-full max-w-2xl relative mt-8">
-            <Search className="absolute left-4 top-3.5 h-6 w-6 text-zinc-400" />
-            <Input 
-              className="h-14 w-full rounded-full pl-12 pr-24 text-lg shadow-lg border-zinc-200 focus-visible:ring-indigo-500 dark:bg-zinc-900 dark:border-zinc-700" 
-              placeholder="어떤 성분이나 피부 고민을 찾고 계신가요?" 
-            />
-            <Button className="absolute right-2 top-2 h-10 rounded-full px-6 bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm dark:bg-indigo-500 dark:hover:bg-indigo-600">
-              검색
-            </Button>
-          </div>
+          <HeroSearch />
 
           <div className="flex flex-wrap justify-center items-center gap-2 pt-6">
             <span className="text-sm font-medium text-zinc-500 flex items-center mr-2 dark:text-zinc-400">

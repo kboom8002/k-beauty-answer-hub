@@ -1,13 +1,28 @@
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { createClient } from "@/utils/supabase/server"
+import { Suspense } from "react"
+import { IngredientFilterState } from "./IngredientFilterState"
 
-export const revalidate = 3600; // Cache for 1 hour
+export const revalidate = 3600;
 
-export default async function IngredientsIndex() {
+export default async function IngredientsIndex(
+  props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }
+) {
+  const searchParams = await props.searchParams;
+  const q = typeof searchParams?.q === 'string' ? searchParams.q : '';
+  const tag = typeof searchParams?.tag === 'string' ? searchParams.tag : '';
+
   const supabase = await createClient()
-  const { data: ingredients } = await supabase.from('ingredients').select('*').order('name')
+  let query = supabase.from('ingredients').select('*').order('name')
+  
+  if (q) {
+    query = query.or(`name.ilike.%${q}%,description.ilike.%${q}%`)
+  }
+  if (tag) {
+    query = query.contains('benefits_tags', [tag])
+  }
+
+  const { data: ingredients } = await query
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
@@ -17,20 +32,9 @@ export default async function IngredientsIndex() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
-        <aside className="w-full md:w-64 space-y-6">
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-zinc-500" />
-            <Input type="search" placeholder="성분 검색..." className="pl-9 dark:bg-zinc-800 dark:border-zinc-700" />
-          </div>
-          <div className="space-y-3">
-            <h3 className="font-semibold text-sm text-zinc-900 border-b pb-2 dark:text-zinc-200 dark:border-zinc-800">기능별 필터</h3>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {['보습', '진정', '미백', '장벽', '탄력', '주름', '저자극'].map(filter => (
-                <Badge key={filter} variant="outline" className="cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 dark:border-zinc-700">{filter}</Badge>
-              ))}
-            </div>
-          </div>
-        </aside>
+        <Suspense fallback={<aside className="w-full md:w-64 space-y-6 shrink-0 h-32 animate-pulse bg-zinc-100 dark:bg-zinc-800 rounded-xl" />}>
+          <IngredientFilterState />
+        </Suspense>
         
         <main className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {ingredients?.map(ing => (
@@ -51,7 +55,7 @@ export default async function IngredientsIndex() {
           ))}
           {(!ingredients || ingredients.length === 0) && (
             <div className="col-span-2 text-center py-10 text-zinc-500 dark:text-zinc-400">
-              데이터베이스에 등록된 성분이 없습니다.
+              해당하는 성분 검색 결과가 없습니다.
             </div>
           )}
         </main>

@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import { ShieldCheck, BarChart2, Briefcase, Box, ClipboardCheck, Activity, LogOut, Code2, Users } from "lucide-react"
 import { createClient } from '@/utils/supabase/server'
 import { logout } from '@/app/login/actions'
+import { WorkspaceMobileNav } from '@/components/shared/WorkspaceMobileNav'
 
 export default async function WorkspaceLayout({ children }: { children: ReactNode }) {
   const supabase = await createClient()
@@ -82,12 +83,16 @@ export default async function WorkspaceLayout({ children }: { children: ReactNod
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-screen overflow-hidden">
-        <header className="h-16 flex items-center justify-between px-8 border-b border-zinc-200 bg-white dark:bg-zinc-950 dark:border-zinc-800">
-          <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100">Workspace</h2>
-          {/* Topbar actions (Notifications, Command Palette) could go here */}
+      <main className="flex-1 flex flex-col h-screen overflow-hidden w-full">
+        <header className="h-16 flex items-center px-4 md:px-8 border-b border-zinc-200 bg-white dark:bg-zinc-950 dark:border-zinc-800 shrink-0">
+          <WorkspaceMobileNav role={role} email={user?.email || 'admin@acmeskin.com'} />
+          <h2 className="text-xl font-bold text-zinc-800 hidden md:block dark:text-zinc-100 ml-2 md:ml-0">Workspace</h2>
+          <div className="md:hidden flex-1 text-center font-bold text-lg text-indigo-900 dark:text-indigo-400">
+            K-뷰티 Answer HUB
+          </div>
+          {/* Topbar actions could go here */}
         </header>
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto p-4 md:p-8 w-full max-w-full">
           {children}
         </div>
       </main>
